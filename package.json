@@ -1,0 +1,93 @@
+{
+  "name": "outlook-msg-preview",
+  "displayName": "Outlook MSG Preview",
+  "description": "Preview Outlook .msg files directly in VS Code",
+  "version": "0.0.1",
+  "publisher": "cwgit7",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cwgit7/outlook-msg-preview.git"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "outlook",
+    "msg",
+    "email",
+    "preview",
+    "viewer"
+  ],
+  "activationEvents": [
+    "onLanguage:msg"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "msg",
+        "extensions": [
+          ".msg"
+        ],
+        "aliases": [
+          "Outlook Message"
+        ]
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "outlook-msg-preview.preview",
+        "displayName": "Outlook MSG Preview",
+        "selector": [
+          {
+            "filenamePattern": "*.msg"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "outlook-msg-preview.openPreview",
+        "title": "Open MSG Preview",
+        "category": "MSG Preview"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "outlook-msg-preview.openPreview",
+          "when": "resourceExtname == .msg",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
+    "eslint": "^8.26.0",
+    "typescript": "^4.8.4",
+    "@vscode/test-electron": "^2.3.8",
+    "@types/mocha": "^10.0.1",
+    "@types/glob": "^8.0.0",
+    "mocha": "^10.2.0",
+    "glob": "^10.3.10",
+    "vsce": "^2.15.0"
+  }
+} 
